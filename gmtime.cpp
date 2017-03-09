@@ -25,8 +25,8 @@ int  main ( ){
 	// obtendo a esttutura
 	
     
-    tm_ptr = gmtime(&tempo_valor);
-	//tm_ptr = localtime(&tempo_valor);
+	//tm_ptr = gmtime(&tempo_valor);
+	tm_ptr = localtime(&tempo_valor);
 
 	
 	cout << "Instante atual: " << tm_ptr->tm_mday << "/" << tm_ptr->tm_mon+1 << "/" << tm_ptr->tm_year+1900 << "\t" << tm_ptr->tm_hour << ":" << tm_ptr->tm_min << ":" << tm_ptr->tm_sec << "\n";
