@@ -1,23 +1,43 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
 #include <unistd.h>
-#define MAXBUF 1000
+#include <map>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+
 
 int main()
 {
-    char buffer[MAXBUF] = {0};
-    FILE *fd = popen("ps -a", "r");
+		std::vector<std::string> vecchar;
+		std::map<std::string,std::string>processtable;
+		std::stringstream iss;
+		std::string key,value;
+		FILE *fd = popen("ps axco pid,command", "r");
+		char *line = NULL;
+		size_t len = 0;
+		ssize_t nread;
+
     if (NULL == fd)
     {
         printf("Error in popen");
-        return 0;;
+        return 0;
     }
-    fread(buffer, MAXBUF, 1, fd);
-    for(int i=0;i<MAXBUF;i++)
-    {
-      std::cout << "LINE[" << i << "]: " << buffer[i] << std::endl;
-    }
-    //printf("%s",buffer);
+		while((nread = getline(&line,&len,fd)) != -1)
+		{
+			vecchar.push_back(std::string(line,strlen(line)));
+		}
+		free(line);
     pclose(fd);
+		std::vector<std::string>::iterator itr;
+		for(itr = vecchar.begin();itr != vecchar.end();itr++)
+		{
+			iss << (*itr);
+			iss >>	key >>std::ws >> value;
+			processtable.insert(std::pair<std::string, std::string>(key,value));
+		}	
+		return 0;
 }
