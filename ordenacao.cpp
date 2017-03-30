@@ -107,16 +107,21 @@ int main ()
 	clock_2 = clock();
 	std::cout << "Tempo de utilização de CPU em segundos : " << ((double)(clock_2-clock_1)/(double)CLOCKS_PER_SEC) << std::endl;
 	resultMap.insert(std::pair<std::string,double>("QuickSort - 1000",((double)(clock_2-clock_1)/(double)CLOCKS_PER_SEC)));
-	//Ordenar utilizando bubleSort
+	//Pegar o tempo inicial do bubblesort
 	clock_1 = clock();
 	bubbleSort(vetorBubbleSort,n);
+	//Pegar o tempo final de duracao do bubblesort
 	clock_2 = clock();
+
+
+
+
 	//1000 10.000 100.000
 	std::cout << "Tempo de utilização de CPU em segundos: " << ((double)(clock_2-clock_1)/(double)CLOCKS_PER_SEC) << std::endl;
 	resultMap.insert(std::pair<std::string,double>("BubbleSort - 1000",((double)(clock_2-clock_1)/(double)CLOCKS_PER_SEC)));
 	delete vetorQuickSort;
 	delete vetorBubbleSort;
-	//Criar vetor com elementos aleatorios[0,100000] 
+	//Criar vetor com elementos aleatorios[0,1] 
 	n = 10000; //10.000 elementos no vetor de sorting
 	criarVetor(n,23);
 	//Ordenar utilizando quickSort
@@ -152,10 +157,14 @@ int main ()
 	resultMap.insert(std::pair<std::string,double>("BubbleSort - 100000",((double)(clock_2-clock_1)/(double)CLOCKS_PER_SEC)));
 	delete vetorQuickSort;
 	delete vetorBubbleSort;
+############################################################################
 	std::map<std::string,double>::iterator itr;
 	for(itr = resultMap.begin();itr != resultMap.end();itr++)
 	{
 		std::cout << (*itr).first << ": " << (*itr).second << std::endl;
 	}
+############################################################################
+
+
 	return 0;
 }

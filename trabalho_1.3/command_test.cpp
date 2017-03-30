@@ -39,5 +39,10 @@ int main()
 			iss >>	key >>std::ws >> value;
 			processtable.insert(std::pair<std::string, std::string>(key,value));
 		}	
+		std::map<std::string,std::string>::iterator tableitr;
+		for(tableitr = processtable.begin();tableitr != processtable.end();tableitr++)
+		{
+			std::cout << (*tableitr).first << ": " << (*tableitr).second << std::endl;
+		}
 		return 0;
 }
